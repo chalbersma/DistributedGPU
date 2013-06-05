@@ -1,0 +1,22 @@
+# Psuedo Code
+
+
+const int batch = SOME_CONST_INT
+
+# Inputs
+float disx = rand (0-1)
+float disy = rand (0-1)
+
+int in = 0
+int total = 0
+
+for ( loop = 0; loop <= batch; batch++) :
+    total++
+    if ( disy < (1-dix)^(1/2) ):
+        # In the circle
+        in++
+    
+    
+#Estimation of pi
+float estpiover4 = float(in) / float(total)
+float estpi = estpiover4 * 4.00
