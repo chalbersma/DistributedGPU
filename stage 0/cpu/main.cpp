@@ -1,8 +1,7 @@
 #include <iostream>
-#include <time.h>
-#include <cmath>
 #include <random>
 #include <chrono>
+#include <thread>
 
 const unsigned long int rounds = 10000;
 using namespace std;
@@ -23,7 +22,7 @@ int main(){
         double disx = distribution(generator);
         double disy = distribution(generator);
 
-        cout << "( " << disx << " , " << disy << " ) " << endl;
+        //cout << "( " << disx << " , " << disy << " ) " << endl;
         if(disx*disx + disy*disy <= 1.0 )
             incircle++;
     }

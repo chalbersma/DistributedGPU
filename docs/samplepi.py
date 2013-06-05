@@ -3,7 +3,7 @@ import math
 import random
 # Basic test of monte carlo
 
-batch = 100000000
+batch = 10000
 
 incircle = 0
 total = 0
