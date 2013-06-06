@@ -5,6 +5,8 @@
 # Manually Added
 # For Codebase bits and pieces
 *.layout
+*.cbp
+*.depend
 
 *.pydevproject
 .project
