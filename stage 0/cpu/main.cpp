@@ -4,6 +4,7 @@
 #include <thread>
 #include <atomic>
 
+//
 const int NUM_THREADS = 4;
 const unsigned long int ROUNDS = 10000;
 using namespace std;
