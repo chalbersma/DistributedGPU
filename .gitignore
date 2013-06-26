@@ -219,3 +219,4 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+/stage 0/cpu/main.bin
