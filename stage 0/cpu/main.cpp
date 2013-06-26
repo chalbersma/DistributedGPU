@@ -3,19 +3,33 @@
 #include <chrono>
 #include <thread>
 #include <atomic>
+#include <mutex>
+
+using namespace std;
+
+struct lockabletotal{
+    unsigned long int num;
+    mutex m;
+};
+
 
 //
-const int NUM_THREADS = 4;
-const unsigned long int ROUNDS = 10000;
-using namespace std;
+const int NUM_THREADS = 64;
+const unsigned long int ROUNDS = 100000;
+
+/// Globals
+
 
 #include "thread.hpp"
 
 
+
+
+
 int main(){
 
-    atomic<unsigned long int> incircle;
-    incircle = 0;
+    lockabletotal incircle;
+    incircle.num = 0;
 
 
     /*
@@ -41,8 +55,10 @@ int main(){
     thread t[NUM_THREADS];
 
     for (int i = 0; i < NUM_THREADS; i++){
+        cout << "New Thread:\t" << i << endl;
         // Calls a NUM_THREADS new threads running x rounds
-        t[i] = thread(dodrops, ROUNDS);
+        t[i] = thread(dodrops, ref(incircle));
+        cout << "Thread Called:\t" << i << endl;
     }
 
     /// Join Threads
@@ -50,10 +66,11 @@ int main(){
         t[i].join();
     }
 
-    cout << "In Cirlce: " << incircle << endl << "Total: " << (NUM_THREADS * ROUNDS) << endl;
+	cout << "This information would be returned to the server" << endl;
+    cout << "In Cirlce: " << incircle.num << endl << "Total: " << (NUM_THREADS * ROUNDS) << endl;
 
 
-    double estpi = ( double(incircle) * double(4.0) ) / double(NUM_THREADS * ROUNDS);
+    double estpi = ( double(incircle.num) * double(4.0) ) / double(NUM_THREADS * ROUNDS);
 
     cout << "Estimation of PI: " << estpi << endl;
 

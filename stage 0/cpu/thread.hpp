@@ -4,8 +4,11 @@
 #include <random>
 #include <chrono>
 
-void dodrops(unsigned long int howmany, atomic<unsigned long int> &incircle){
+void dodrops(lockabletotal & incircle);
 
+void dodrops(lockabletotal & incircle){
+
+    unsigned long int howmany = ROUNDS;
     // Grab a new seed
     unsigned seed = chrono::system_clock::now().time_since_epoch().count();
     cout << seed << endl;
@@ -23,7 +26,14 @@ void dodrops(unsigned long int howmany, atomic<unsigned long int> &incircle){
             tempcircle++;
     }
 
-    incircle += tempcircle;
+    while(!(incircle.m.try_lock())){
+        // As long as I can't get a lock wait for 100 ms and try again.
+        chrono::milliseconds dura( 100 );
+        this_thread::sleep_for( dura );
+        continue;
+    }
+    incircle.num += tempcircle;
+    incircle.m.unlock();
 
 }
 
