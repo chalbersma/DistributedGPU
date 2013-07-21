@@ -8,7 +8,7 @@
 using namespace std;
 
 struct lockabletotal{
-    unsigned long int num;
+    unsigned long long int num;
     mutex m;
 };
 
